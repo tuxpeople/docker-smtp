@@ -1,21 +1,29 @@
-## Supported tags
-
-* [`stretch`, `latest` (*stretch/Dockerfile*)](https://github.com/BytemarkHosting/docker-smtp/blob/master/stretch/Dockerfile)
+# smtp
+![Github Workflow Badge](https://github.com/tuxpeople/docker-smtp/actions/workflows/release.yml/badge.svg)
+![Github Last Commit Badge](https://img.shields.io/github/last-commit/tuxpeople/docker-smtp)
+![Docker Pull Badge](https://img.shields.io/docker/pulls/tdeutsch/smtp)
+![Docker Stars Badge](https://img.shields.io/docker/stars/tdeutsch/smtp)
+![Docker Size Badge](https://img.shields.io/docker/image-size/tdeutsch/smtp)
 
 ## Quick reference
+
+Originally by BytemarkHosting, I converted it to alpine and made it multi arch.
 
 This image allows linked containers to send outgoing email. You can configure
 it to send email directly to recipients, or to act as a smart host that relays
 mail to an intermediate server (eg, GMail, SendGrid).
 
-* **Code repository:**
+* **Original repository:**
   https://github.com/BytemarkHosting/docker-smtp
+* **Code repository:**
+  https://github.com/tuxpeople/docker-smtp
 * **Where to file issues:**
-  https://github.com/BytemarkHosting/docker-smtp/issues
-* **Maintained by:**
-  [Bytemark Hosting](https://www.bytemark.co.uk)
+  https://github.com/tuxpeople/docker-smtp/issues
 * **Supported architectures:**
-  [Any architecture that has the Debian `exim4-daemon-light` package](https://packages.debian.org/stretch/exim4-daemon-light)
+  ```amd64```, ```armv7```, ```armv6``` and ```arm64```
+
+## Image tags
+- ```latest``` gets automatically built on every push to master and also via a weekly cron job
 
 ## Usage
 
@@ -25,7 +33,7 @@ In this example, linked containers can connect to hostname `mail` and port `25`
 to send outgoing email. The SMTP container sends email out directly.
 
 ```
-docker run --restart always --name mail -d bytemark/smtp
+docker run --restart always --name mail -d tdeutsch/smtp
 
 ```
 
@@ -35,7 +43,7 @@ docker run --restart always --name mail -d bytemark/smtp
 version: '3'
 services:
   mail:
-    image: bytemark/smtp
+    image: tdeutsch/smtp
     restart: always
 
 ```
@@ -52,7 +60,7 @@ docker run --restart always --name mail \
     -e RELAY_PORT=587 \
     -e RELAY_USERNAME=alice@example.com \
     -e RELAY_PASSWORD=secretpassword \
-    -d bytemark/smtp
+    -d tdeutsch/smtp
 
 ```
 
@@ -62,7 +70,7 @@ docker run --restart always --name mail \
 version: '3'
 services:
   mail:
-    image: bytemark/smtp
+    image: tdeutsch/smtp
     restart: always
     environment:
       RELAY_HOST: smtp.example.com
@@ -91,4 +99,3 @@ unlikely to work!
   `10.0.0.0/8;172.16.0.0/12;192.168.0.0/16`, which provides a thin layer of
   protection in case port 25 is accidentally exposed to the public internet
   (which would make your SMTP container an open relay).
-
