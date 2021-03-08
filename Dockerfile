@@ -1,11 +1,9 @@
-FROM debian:stretch-slim
+FROM alpine:3.13.2
 
 # Install exim4
-ENV DEBIAN_FRONTEND noninteractive
+# hadolint ignore=DLxxxx
 RUN set -ex; \
-    apt-get update; \
-    apt-get install -y exim4-daemon-light; \
-    apt-get clean
+    apk add --no-cache exim
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 EXPOSE 25/tcp

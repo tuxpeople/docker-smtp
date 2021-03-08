@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-CONFDIR=/etc/exim4
+CONFDIR=/etc/exim/
 
 # By default, send email directly to the recipient.
 DC_EXIMCONFIG_CONFIGTYPE="internet"
