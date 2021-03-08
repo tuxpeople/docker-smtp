@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-CONFDIR=/etc/exim/
+CONFDIR=/etc/exim
 
 # By default, send email directly to the recipient.
 DC_EXIMCONFIG_CONFIGTYPE="internet"
@@ -25,7 +25,7 @@ if [ "x$RELAY_NETS" != "x" ]; then
 fi
 
 # Write exim configuration.
-cat << EOF > "$CONFDIR/update-exim4.conf.conf"
+cat << EOF > "$CONFDIR/update-exim4.conf"
 dc_eximconfig_configtype='$DC_EXIMCONFIG_CONFIGTYPE'
 dc_other_hostnames=''
 dc_local_interfaces=''
@@ -44,10 +44,12 @@ EOF
 # Set primary_hostname.
 if [ "x$MAILNAME" != "x" ]; then
     printf '%s\n' "$MAILNAME" > /etc/mailname
-    printf '%s\n' "MAIN_HARDCODE_PRIMARY_HOSTNAME=$MAILNAME" >> "$CONFDIR/update-exim4.conf.conf"
+    printf '%s\n' "MAIN_HARDCODE_PRIMARY_HOSTNAME=$MAILNAME" >> "$CONFDIR/update-exim4.conf"
 fi
 
+chmod 755 $CONFDIR/update-exim4.conf
+
 # Apply exim configuration.
-update-exim4.conf
+$CONFDIR/update-exim4.conf
 
 exec "$@"
