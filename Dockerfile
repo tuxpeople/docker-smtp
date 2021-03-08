@@ -1,7 +1,7 @@
 FROM alpine:3.13.2
 
 # Install exim4
-# hadolint ignore=DLxxxx
+# hadolint ignore=DL3018
 RUN set -ex; \
     apk add --no-cache exim
 
