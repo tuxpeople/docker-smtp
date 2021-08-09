@@ -1,4 +1,4 @@
-FROM alpine:3.14.0
+FROM alpine:3.14.1
 
 # Install exim4
 # hadolint ignore=DL3018
