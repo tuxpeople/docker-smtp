@@ -1,3 +1,6 @@
+THIS REPOSITORY IS NOW ARCHIVED. I'M USING NOW THIS:
+https://github.com/devture/exim-relay
+
 # smtp
 ![Github Workflow Badge](https://github.com/tuxpeople/docker-smtp/actions/workflows/release.yml/badge.svg)
 ![Github Last Commit Badge](https://img.shields.io/github/last-commit/tuxpeople/docker-smtp)
